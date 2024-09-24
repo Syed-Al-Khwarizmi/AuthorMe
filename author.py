@@ -11,15 +11,9 @@ from html2docx import html2docx
 import io
 from tqdm import tqdm  # Add this import at the top of your file
 
-# Load environment variables from .env file
-load_dotenv()
 
-# Set the API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
-client = OpenAI()  # Create an instance of the OpenAI client
-
-def get_sub_topics(topic, num_subtopics):
+def get_sub_topics(topic, num_subtopics, openai_api_key):
+    client = OpenAI(api_key=openai_api_key)  # Initialize the client with the provided API key
     prompt = f"""Generate {num_subtopics} subtopics for the main topic: {topic}.
     Return the result as a JSON array of strings, without any additional text.
     Example format:
@@ -28,7 +22,6 @@ def get_sub_topics(topic, num_subtopics):
 
     The above format should be returned like a json object
     """
-
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",  # or "gpt-3.5-turbo", depending on your preference
@@ -58,7 +51,8 @@ def get_sub_topics(topic, num_subtopics):
 
     return response_data
 
-def generate_content(main_topic, subtopics):
+def generate_content(main_topic, subtopics, openai_api_key):
+    client = OpenAI(api_key=openai_api_key)  # Initialize the client with the provided API key
     full_content = f"<h1>{html.escape(main_topic)}</h1>\n"
 
     # Wrap the subtopics iteration with tqdm
@@ -84,7 +78,7 @@ def generate_content(main_topic, subtopics):
 def html_to_docx(html_content, title):
     try:
         # Print the HTML content for debugging
-        print("HTML Content:", html_content)
+        # print("HTML Content:", html_content)
         
         # Convert HTML to DOCX
         docx_stream = html2docx(html_content, title=title)

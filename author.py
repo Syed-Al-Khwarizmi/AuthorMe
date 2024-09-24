@@ -33,7 +33,7 @@ def get_sub_topics(topic, num_subtopics, openai_api_key):
     raw_content = response.choices[0].message.content
     
     # Remove code block markers if present
-    clean_content = re.sub(r'(```|\'\'\'|""")(json)?\s*|\s*(```|\'\'\'|""")', '', raw_content).strip()
+    clean_content = re.sub(r'(```|\'\'\'|""")(json|html)?\s*|\s*(```|\'\'\'|""")', '', raw_content).strip()
     
     try:
         parsed_data = json.loads(clean_content)
@@ -58,7 +58,7 @@ def generate_content(main_topic, subtopics, openai_api_key):
     for subtopic in tqdm(subtopics, desc="Generating content", unit="subtopic"):
         prompt = f"""Generate detailed content for the subtopic '{subtopic}' within the context of '{main_topic}'.
         Use HTML formatting including <h2> for the subtopic, <p> for paragraphs, <ul> or <ol> for lists, and <blockquote> for examples or quotes.
-        Aim for about 200-300 words of informative, well-structured content."""
+        Aim for about 300-500 words of informative, well-structured content."""
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",

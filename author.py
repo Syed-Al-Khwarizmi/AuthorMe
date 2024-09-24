@@ -52,7 +52,7 @@ def get_sub_topics(topic, num_subtopics, openai_api_key):
 
 def generate_content(main_topic, subtopics, openai_api_key):
     client = OpenAI(api_key=openai_api_key)  # Initialize the client with the provided API key
-    full_content = f"<h1>{html.escape(main_topic)}</h1>\n"
+    full_content = f"<title>{html.escape(main_topic)}</title>\n"
 
     # Wrap the subtopics iteration with tqdm
     for subtopic in tqdm(subtopics, desc="Generating content", unit="subtopic"):
@@ -69,7 +69,7 @@ def generate_content(main_topic, subtopics, openai_api_key):
         )
 
         subtopic_content = response.choices[0].message.content.strip()
-        full_content += f"\n{subtopic_content}\n"
+        full_content += f"<h1>{html.escape(subtopic)}</h1>\n{subtopic_content}\n"
 
     return full_content
 

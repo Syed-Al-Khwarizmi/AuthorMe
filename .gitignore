@@ -1,3 +1,6 @@
+# Exclude .env files
+.env
+
 # Exclude all .docx files
 *.docx
 

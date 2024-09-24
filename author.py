@@ -1,14 +1,13 @@
+import io
+import re  # Add this import at the top of your file
+import html  # Add this import at the top of your file
 import os
 from typing import List
 import openai
-from dotenv import load_dotenv
 import json  # Add this import at the top of your file
 from openai import OpenAI  # Add this import at the top of your file
-import re  # Add this import at the top of your file
-import html  # Add this import at the top of your file
 from docx import Document
 from html2docx import html2docx
-import io
 from tqdm import tqdm  # Add this import at the top of your file
 
 

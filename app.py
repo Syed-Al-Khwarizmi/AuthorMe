@@ -16,7 +16,11 @@ if st.button("Generate and Download"):
         with st.spinner("Generating subtopics..."):
             subtopics = get_sub_topics(main_topic, num_subtopics, openai_api_key)["subtopics"]
         
-        with st.spinner("Generating content..."):
+        # Calculate estimated time range
+        min_time = num_subtopics * 5
+        max_time = num_subtopics * 9
+        st.info(f"Estimated time: {min_time} to {max_time} seconds")
+        with st.spinner(f"Generating content... (Estimated time: {min_time}-{max_time} seconds)"):
             article_content = generate_content(main_topic, subtopics, openai_api_key)
         
         with st.spinner("Converting to DOCX..."):

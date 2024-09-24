@@ -77,7 +77,7 @@ def generate_content(main_topic, subtopics, openai_api_key):
 def html_to_docx(html_content, title):
     try:
         # Print the HTML content for debugging
-        # print("HTML Content:", html_content)
+        print("HTML Content:", html_content)
         
         # Convert HTML to DOCX
         docx_stream = html2docx(html_content, title=title)

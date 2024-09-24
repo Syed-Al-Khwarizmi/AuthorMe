@@ -33,7 +33,7 @@ def get_sub_topics(topic, num_subtopics, openai_api_key):
     raw_content = response.choices[0].message.content
     
     # Remove code block markers if present
-    clean_content = re.sub(r'(```|\'\'\'|""")(json|html)?\s*|\s*(```|\'\'\'|""")', '', raw_content).strip()
+    clean_content = re.sub(r'(```html|```)', '', raw_content).strip()
     
     try:
         parsed_data = json.loads(clean_content)

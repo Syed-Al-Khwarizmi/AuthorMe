@@ -19,7 +19,7 @@ def get_sub_topics(topic, num_subtopics, openai_api_key):
         "main_topic": "Main Topic",
         "subtopics": ["Subtopic 1", "Subtopic 2", "Subtopic 3"]
 
-    The above format should be returned like a json object
+    The above format should be returned like a json object. Don't include any triple quotes or code block markers or backticks in your response. 
     """
 
     response = client.chat.completions.create(

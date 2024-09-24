@@ -1,7 +1,5 @@
-# Exclude .env files
-.env
-
 # Exclude all .docx files
 *.docx
 
 # You can add more rules as needed
+.env
